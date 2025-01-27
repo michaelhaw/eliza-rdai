@@ -56,5 +56,5 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/characters ./characters
 
 # Set the command to run the application
-CMD ["sh", "-c", "pnpm start --character=$CHARACTER_FILE"]
+CMD ["sh", "-c", "pnpm start --character=\"$CHARACTER_FILE\""]
 
