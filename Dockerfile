@@ -19,6 +19,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc turbo.json ./
 
 # Copy the rest of the application code
 COPY agent ./agent
+COPY client ./client
 COPY packages ./packages
 COPY scripts ./scripts
 
