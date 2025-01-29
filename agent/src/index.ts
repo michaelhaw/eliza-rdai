@@ -159,6 +159,7 @@ import { quickIntelPlugin } from "@elizaos/plugin-quick-intel";
 
 import { trikonPlugin } from "@elizaos/plugin-trikon";
 import arbitragePlugin from "@elizaos/plugin-arbitrage";
+import { sendSelfiePlugin } from "@elizaos/plugin-send-selfie";
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
@@ -1295,6 +1296,14 @@ export async function createAgent(
             getSecret(character, "ARBITRAGE_FLASHBOTS_RELAY_SIGNING_KEY") &&
             getSecret(character, "ARBITRAGE_BUNDLE_EXECUTOR_ADDRESS")
                 ? arbitragePlugin
+                : null,
+            getSecret(character, "FAL_API_KEY") ||
+            getSecret(character, "OPENAI_API_KEY") ||
+            getSecret(character, "VENICE_API_KEY") ||
+            getSecret(character, "NINETEEN_AI_API_KEY") ||
+            getSecret(character, "HEURIST_API_KEY") ||
+            getSecret(character, "LIVEPEER_GATEWAY_URL")
+                ? sendSelfiePlugin
                 : null,
         ]
             .flat()
