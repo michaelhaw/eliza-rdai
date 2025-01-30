@@ -34,9 +34,6 @@ RUN ln -sf /usr/bin/python3 /usr/bin/python
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and other configuration files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc turbo.json ./
-
 # Copy application code
 COPY . .
 
@@ -69,8 +66,6 @@ WORKDIR /app
 # Copy built artifacts and production dependencies from the builder stage
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/pnpm-workspace.yaml ./
-COPY --from=builder /app/eslint.config.mjs ./
-COPY --from=builder /app/.eslintrc.json ./
 COPY --from=builder /app/.npmrc ./
 COPY --from=builder /app/turbo.json ./
 COPY --from=builder /app/node_modules ./node_modules
