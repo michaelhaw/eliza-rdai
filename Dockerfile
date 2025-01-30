@@ -37,11 +37,8 @@ WORKDIR /app
 # Copy package.json and other configuration files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc turbo.json ./
 
-# Copy the rest of the application code
-COPY agent ./agent
-COPY client ./client
-COPY packages ./packages
-COPY scripts ./scripts
+# Copy application code
+COPY . .
 
 # Copy only the specified character file to the special directory
 ARG CHAR_FILE
