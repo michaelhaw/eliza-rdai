@@ -21,7 +21,11 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc turbo.json ./
 COPY agent ./agent
 COPY packages ./packages
 COPY scripts ./scripts
-COPY characters ./characters
+
+# Copy only the specified character file to the special directory
+ARG CHAR_FILE
+ARG CHAR_DEST
+COPY ${CHAR_FILE} ${CHAR_DEST}
 
 # Install dependencies and build the project
 RUN pnpm install \
@@ -51,5 +55,8 @@ COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/characters ./characters
 
+# Expose necessary ports
+EXPOSE 3000
+
 # Set the command to run the application
-CMD ["pnpm", "start"]
+CMD ["sh", "-c", "pnpm start --character=\"$CHARACTER_FILE\""]
